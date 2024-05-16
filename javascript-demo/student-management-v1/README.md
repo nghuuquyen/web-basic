@@ -2,11 +2,8 @@
 
 ![Homepage](homepage.png)
 
-## Giới thiệu
-Ứng dụng Quản lý Sinh viên là một công cụ đơn giản và dễ sử dụng để quản lý thông tin sinh viên. Ứng dụng này được xây dựng bằng HTML, CSS và JavaScript, sử dụng `localStorage` để lưu trữ dữ liệu sinh viên trên trình duyệt.
-
-
-## Kiến thức sử dụng
+## I. Giới thiệu
+Đây là bài thực hành xây dựng ứng dụng Quản lý Sinh viên là một công cụ đơn giản và dễ sử dụng để quản lý thông tin sinh viên. Ứng dụng này được xây dựng bằng HTML, CSS và JavaScript, sử dụng `localStorage` để lưu trữ dữ liệu sinh viên trên trình duyệt.
 
 Bài thực hành này mục đích của là để sinh viên thực hành các phần kiến thức quan trọng sau của Javascript:
 
@@ -21,7 +18,7 @@ Bài thực hành này mục đích của là để sinh viên thực hành các
 9) Sự kiện (Events)
 10) Web API
 
-Chi tiết từng phần được viết cụ thể bên dưới
+## II. Kiến thức sử dụng
 
 ### 1. Cài đặt JavaScript
 JavaScript là một ngôn ngữ lập trình phổ biến được sử dụng chủ yếu cho lập trình web. Nó cho phép các nhà phát triển tạo ra các trang web tương tác và động bằng cách thao tác với các phần tử HTML và CSS. JavaScript được hỗ trợ rộng rãi bởi tất cả các trình duyệt web hiện đại và có thể được nhúng trực tiếp vào các trang HTML hoặc tách biệt qua các tệp `.js`.
@@ -296,7 +293,7 @@ if (navigator.geolocation) {
 }
 ```
 
-## Chức năng của ứng dụng
+## III. Chức năng của ứng dụng
 Ứng dụng Quản lý Sinh viên cung cấp các chức năng chính sau:
 1. **Thêm sinh viên**: Cho phép thêm mới một sinh viên với các thông tin như Mã Sinh Viên, Tên, Ngày Sinh, Giới Tính và Lớp.
     - ![Add Student Popup](add_student_popup.png)
@@ -307,12 +304,12 @@ if (navigator.geolocation) {
 5. **Hiển thị danh sách sinh viên**: Hiển thị danh sách các sinh viên đã được thêm vào ứng dụng.
     - ![Homepage](homepage.png)
 
-## Các lưu ý
+## IV. Các lưu ý
 - **localStorage**: Dữ liệu được lưu trữ trong `localStorage` của trình duyệt, nghĩa là dữ liệu sẽ tồn tại ngay cả khi bạn đóng và mở lại trình duyệt. Tuy nhiên, dữ liệu sẽ bị mất nếu bạn xóa bộ nhớ cache của trình duyệt hoặc chuyển sang một trình duyệt khác.
 - **Không thay đổi Mã Sinh Viên khi chỉnh sửa**: Khi chỉnh sửa thông tin sinh viên, bạn không thể thay đổi Mã Sinh Viên của sinh viên đó.
 - **Kiểm tra trùng lặp Mã Sinh Viên**: Khi thêm sinh viên mới, ứng dụng sẽ kiểm tra và thông báo nếu Mã Sinh Viên đã tồn tại trong danh sách.
 
-## Cách sử dụng
+## V. Cách sử dụng
 1. **Thêm sinh viên**:
     - Nhấn nút "Add Student".
     - Nhập thông tin sinh viên vào các trường trong cửa sổ bật lên.

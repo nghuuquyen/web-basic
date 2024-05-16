@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load students from localStorage on page load
     loadStudents();
 
+    // Open the modal for adding a new student
     addStudentBtn.addEventListener('click', () => openModal('add'));
+
+    // Close the modal when clicking on the close button or outside the modal
     closeModalBtns.forEach(btn => btn.addEventListener('click', closeModal));
     window.addEventListener('click', (event) => {
         if (event.target == studentModal || event.target == confirmDeleteModal) {
@@ -21,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Handle form submission for adding or editing a student
     studentForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const formAction = document.getElementById('formAction').value;
@@ -30,29 +34,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const gender = document.querySelector('input[name="gender"]:checked').value;
         const className = document.getElementById('class').value;
 
+        // Check for duplicate student ID if adding a new student
         if (formAction === 'add' && isDuplicateStudentId(studentId)) {
             alert('Student ID already exists!');
             return;
         }
 
+        // Add or update the student based on the form action
         if (formAction === 'add') {
             addStudent(studentId, name, dob, gender, className);
         } else {
             updateStudent(studentId, name, dob, gender, className);
         }
+
+        // Save the updated student list to localStorage
         saveStudents();
         closeModal();
         clearForm();
     });
 
+    // Confirm deletion of a student
     confirmDeleteBtn.addEventListener('click', () => {
         deleteStudent(studentToDelete);
         saveStudents();
         closeModal();
     });
 
+    // Cancel deletion of a student
     cancelDeleteBtn.addEventListener('click', closeModal);
 
+    // Open the modal with appropriate action (add or edit)
     function openModal(action, studentId = '', name = '', dob = '', gender = 'Unspecified', className = 'Class A') {
         document.getElementById('formAction').value = action;
         studentModalTitle.textContent = action === 'add' ? 'Add Student' : 'Edit Student';
@@ -66,11 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
         studentModal.style.display = 'block';
     }
 
+    // Close the modal
     function closeModal() {
         studentModal.style.display = 'none';
         confirmDeleteModal.style.display = 'none';
     }
 
+    // Clear the form inputs and reset readOnly property of student ID
     function clearForm() {
         document.getElementById('studentId').readOnly = false;
         document.getElementById('studentId').value = '';
@@ -80,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('class').value = 'Class A';
     }
 
+    // Check if a student ID already exists
     function isDuplicateStudentId(studentId) {
         const rows = studentTableBody.rows;
         for (let i = 0; i < rows.length; i++) {
@@ -90,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
+    // Add a new student to the table
     function addStudent(studentId, name, dob, gender, className) {
         const newRow = studentTableBody.insertRow();
         newRow.innerHTML = `
@@ -105,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
+    // Update an existing student in the table
     function updateStudent(studentId, name, dob, gender, className) {
         const rows = studentTableBody.rows;
         for (let i = 0; i < rows.length; i++) {
@@ -118,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Edit an existing student
     window.editStudent = (button) => {
         const row = button.parentNode.parentNode;
         const studentId = row.cells[0].innerText;
@@ -129,12 +146,14 @@ document.addEventListener('DOMContentLoaded', () => {
         openModal('edit', studentId, name, dob, gender, className);
     };
 
+    // Confirm deletion of a student
     window.confirmDelete = (button) => {
         const row = button.parentNode.parentNode;
         studentToDelete = row;
         confirmDeleteModal.style.display = 'block';
     };
 
+    // Delete a student from the table and localStorage
     function deleteStudent(row) {
         const studentId = row.cells[0].innerText;
         row.parentNode.removeChild(row);
@@ -142,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         studentToDelete = null;
     }
 
+    // Save the list of students to localStorage
     function saveStudents() {
         const students = [];
         const rows = studentTableBody.rows;
@@ -156,12 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('students', JSON.stringify(students));
     }
 
+    // Remove a student from localStorage
     function removeStudent(studentId) {
         const students = JSON.parse(localStorage.getItem('students')) || [];
         const updatedStudents = students.filter(student => student.studentId !== studentId);
         localStorage.setItem('students', JSON.stringify(updatedStudents));
     }
 
+    // Load the list of students from localStorage
     function loadStudents() {
         const students = JSON.parse(localStorage.getItem('students')) || [];
         students.forEach(student => {

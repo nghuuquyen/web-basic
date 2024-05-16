@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addStudentBtn = document.getElementById('addStudentBtn');
     const studentModal = document.getElementById('studentModal');
+    const studentModalTitle = document.getElementById('studentModalTitle');
     const closeModalBtns = document.querySelectorAll('.close');
     const studentForm = document.getElementById('studentForm');
     const studentTableBody = document.getElementById('studentTable').getElementsByTagName('tbody')[0];
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const gender = document.querySelector('input[name="gender"]:checked').value;
         const className = document.getElementById('class').value;
 
-        if (isDuplicateStudentId(studentId)) {
+        if (formAction === 'add' && isDuplicateStudentId(studentId)) {
             alert('Student ID already exists!');
             return;
         }
@@ -49,8 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openModal(action, studentId = '', name = '', dob = '', gender = 'Unspecified', className = 'Class A') {
         document.getElementById('formAction').value = action;
-        document.getElementById('studentId').readOnly = (action === 'edit');
-        document.getElementById('studentId').value = studentId;
+        studentModalTitle.textContent = action === 'add' ? 'Add Student' : 'Edit Student';
+        const studentIdInput = document.getElementById('studentId');
+        studentIdInput.readOnly = (action === 'edit');
+        studentIdInput.value = studentId;
         document.getElementById('name').value = name;
         document.getElementById('dob').value = dob;
         document.querySelector(`input[name="gender"][value="${gender}"]`).checked = true;
@@ -64,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearForm() {
+        document.getElementById('studentId').readOnly = false;
         document.getElementById('studentId').value = '';
         document.getElementById('name').value = '';
         document.getElementById('dob').value = '';

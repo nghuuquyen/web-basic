@@ -64,6 +64,7 @@ td button {
 }
 
 .modal-content {
+    position: relative;
     background-color: #fff;
     margin: 5% auto;
     padding: 20px;
@@ -80,9 +81,20 @@ td button {
     to {opacity: 1;}
 }
 
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
 .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
@@ -94,14 +106,37 @@ td button {
     text-decoration: none;
 }
 
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
 input[type="text"], input[type="date"], select {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+}
+
+.gender-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.gender-container input[type="radio"] {
+    margin: 0;
+}
+
+.gender-container label {
+    margin-right: 10px;
+    margin-bottom: 0; /* Ensure no margin-bottom for radio button labels */
 }
 
 input[type="submit"] {
@@ -118,21 +153,10 @@ input[type="submit"]:hover {
     background-color: #218838;
 }
 
-label {
-    margin-right: 10px;
-}
-
-input[type="radio"] {
-    margin-right: 5px;
-}
-
-.gender-container {
-    margin: 10px 0;
-}
-
 .modal-buttons {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
+    gap: 10px; /* Add gap between buttons */
 }
 
 #confirmDeleteBtn {
@@ -149,11 +173,10 @@ input[type="radio"] {
     border: none;
     padding: 0;
     cursor: pointer;
-    margin-left: 10px;
+    font-size: 16px;
 }
 
 #cancelDeleteBtn:hover {
     text-decoration: underline;
     color: #5a6268;
 }
-

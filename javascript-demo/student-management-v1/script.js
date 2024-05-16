@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
     let studentToDelete = null;
 
+    // Load students from localStorage on page load
+    loadStudents();
+
     addStudentBtn.addEventListener('click', () => openModal('add'));
     closeModalBtns.forEach(btn => btn.addEventListener('click', closeModal));
     window.addEventListener('click', (event) => {
@@ -37,12 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             updateStudent(studentId, name, dob, gender, className);
         }
+        saveStudents();
         closeModal();
         clearForm();
     });
 
     confirmDeleteBtn.addEventListener('click', () => {
         deleteStudent(studentToDelete);
+        saveStudents();
         closeModal();
     });
 
@@ -131,7 +136,36 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function deleteStudent(row) {
+        const studentId = row.cells[0].innerText;
         row.parentNode.removeChild(row);
+        removeStudent(studentId);
         studentToDelete = null;
+    }
+
+    function saveStudents() {
+        const students = [];
+        const rows = studentTableBody.rows;
+        for (let i = 0; i < rows.length; i++) {
+            const studentId = rows[i].cells[0].innerText;
+            const name = rows[i].cells[1].innerText;
+            const dob = rows[i].cells[2].innerText;
+            const gender = rows[i].cells[3].innerText;
+            const className = rows[i].cells[4].innerText;
+            students.push({ studentId, name, dob, gender, className });
+        }
+        localStorage.setItem('students', JSON.stringify(students));
+    }
+
+    function removeStudent(studentId) {
+        const students = JSON.parse(localStorage.getItem('students')) || [];
+        const updatedStudents = students.filter(student => student.studentId !== studentId);
+        localStorage.setItem('students', JSON.stringify(updatedStudents));
+    }
+
+    function loadStudents() {
+        const students = JSON.parse(localStorage.getItem('students')) || [];
+        students.forEach(student => {
+            addStudent(student.studentId, student.name, student.dob, student.gender, student.className);
+        });
     }
 });

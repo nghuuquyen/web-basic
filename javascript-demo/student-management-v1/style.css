@@ -94,7 +94,7 @@ td button {
     text-decoration: none;
 }
 
-input[type="text"], input[type="number"] {
+input[type="text"], input[type="date"], select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -117,3 +117,43 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #218838;
 }
+
+label {
+    margin-right: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+.gender-container {
+    margin: 10px 0;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#confirmDeleteBtn {
+    background-color: #dc3545;
+}
+
+#confirmDeleteBtn:hover {
+    background-color: #c82333;
+}
+
+#cancelDeleteBtn {
+    background: none;
+    color: #6c757d;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#cancelDeleteBtn:hover {
+    text-decoration: underline;
+    color: #5a6268;
+}
+

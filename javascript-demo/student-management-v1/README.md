@@ -3,12 +3,56 @@
 ## Giới thiệu
 Ứng dụng Quản lý Sinh viên là một công cụ đơn giản và dễ sử dụng để quản lý thông tin sinh viên. Ứng dụng này được xây dựng bằng HTML, CSS và JavaScript, sử dụng `localStorage` để lưu trữ dữ liệu sinh viên trên trình duyệt.
 
+![Homepage](homepage.png)
+
 ## Kiến thức sử dụng
 
 ### 1. Giới thiệu JavaScript
 - **Lịch sử và vai trò của JavaScript**: Giới thiệu về lịch sử phát triển của JavaScript và vai trò của nó trong lập trình web.
 - **Cài đặt môi trường**: Hướng dẫn sinh viên cài đặt các công cụ cần thiết như trình duyệt, code editor (VD: Visual Studio Code).
 - **Cấu trúc cơ bản của JavaScript**: Giới thiệu cú pháp cơ bản, comment, và cách viết script.
+
+#### Cách thêm Javasript vào trang Web?
+
+Có thể thêm JavaScript trực tiếp vào trong tệp HTML bằng cách sử dụng thẻ `<script>` như dưới đây
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inline JavaScript Example</title>
+</head>
+<body>
+    <h1>Hello, world!</h1>
+    <script>
+        // JavaScript nội tuyến
+        console.log("This is an inline JavaScript example.");
+    </script>
+</body>
+</html>
+```
+
+cũng có thể thêm JavaScript bằng cách sử dụng một tệp JavaScript ngoài. Để làm điều này, bạn cần tạo một tệp .js và liên kết nó trong tệp HTML như sau
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>External JavaScript Example</title>
+</head>
+<body>
+    <h1>Hello, world!</h1>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+#### Sự khác biệt khi thêm Scripts và <head> hoặc <body> của tệp HTML?
+
+- Khi thêm JavaScript vào phần `<head>`, mã JavaScript sẽ được thực thi trước khi toàn bộ nội dung của trang được tải. Điều này có thể hữu ích cho các thiết lập ban đầu hoặc khai báo biến toàn cục.
+- Thêm JavaScript vào cuối phần `<body>` đảm bảo rằng mã JavaScript sẽ được thực thi sau khi toàn bộ nội dung của trang đã được tải. Đây là cách phổ biến để thêm JavaScript, đặc biệt khi mã JavaScript cần tương tác với các phần tử DOM.
 
 ### 2. Biến và kiểu dữ liệu
 - **Biến**: Giải thích khái niệm biến, các từ khóa khai báo biến (var, let, const), phạm vi của biến.
@@ -163,7 +207,7 @@ studentTable.innerHTML = '<tr><td>12345</td><td>John Doe</td></tr>';
   - Ví dụ: Xử lý sự kiện `click` khi người dùng nhấn nút "Add Student", "Edit", "Delete".
 - **Các loại sự kiện phổ biến**: Click, submit, change, mouseover, keypress, etc.
 
-```
+```js
 // Thêm sự kiện click cho nút "Add Student"
 document.getElementById('addStudentBtn').addEventListener('click', function() {
   openModal('add');

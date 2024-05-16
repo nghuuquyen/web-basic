@@ -1,16 +1,31 @@
 # Student Management System
 
+![Homepage](homepage.png)
+
 ## Giới thiệu
 Ứng dụng Quản lý Sinh viên là một công cụ đơn giản và dễ sử dụng để quản lý thông tin sinh viên. Ứng dụng này được xây dựng bằng HTML, CSS và JavaScript, sử dụng `localStorage` để lưu trữ dữ liệu sinh viên trên trình duyệt.
 
-![Homepage](homepage.png)
 
 ## Kiến thức sử dụng
 
-### 1. Giới thiệu JavaScript
-- **Lịch sử và vai trò của JavaScript**: Giới thiệu về lịch sử phát triển của JavaScript và vai trò của nó trong lập trình web.
-- **Cài đặt môi trường**: Hướng dẫn sinh viên cài đặt các công cụ cần thiết như trình duyệt, code editor (VD: Visual Studio Code).
-- **Cấu trúc cơ bản của JavaScript**: Giới thiệu cú pháp cơ bản, comment, và cách viết script.
+Bài thực hành này mục đích của là để sinh viên thực hành các phần kiến thức quan trọng sau của Javascript:
+
+1) Cài đặt JavaScript
+2) Biến và kiểu dữ liệu
+3) Toán tử và biểu thức
+4) Câu lệnh điều kiện
+5) Vòng lặp
+6) Hàm
+7) Mảng và đối tượng
+8) DOM (Document Object Model)
+9) Sự kiện (Events)
+10) Web API
+
+Chi tiết từng phần được viết cụ thể bên dưới
+
+### 1. Cài đặt JavaScript
+JavaScript là một ngôn ngữ lập trình phổ biến được sử dụng chủ yếu cho lập trình web. Nó cho phép các nhà phát triển tạo ra các trang web tương tác và động bằng cách thao tác với các phần tử HTML và CSS. JavaScript được hỗ trợ rộng rãi bởi tất cả các trình duyệt web hiện đại và có thể được nhúng trực tiếp vào các trang HTML hoặc tách biệt qua các tệp `.js`.
+
 
 #### Cách thêm Javasript vào trang Web?
 
@@ -55,9 +70,11 @@ cũng có thể thêm JavaScript bằng cách sử dụng một tệp JavaScript
 - Thêm JavaScript vào cuối phần `<body>` đảm bảo rằng mã JavaScript sẽ được thực thi sau khi toàn bộ nội dung của trang đã được tải. Đây là cách phổ biến để thêm JavaScript, đặc biệt khi mã JavaScript cần tương tác với các phần tử DOM.
 
 ### 2. Biến và kiểu dữ liệu
-- **Biến**: Giải thích khái niệm biến, các từ khóa khai báo biến (var, let, const), phạm vi của biến.
+Biến trong JavaScript là các nơi lưu trữ dữ liệu có thể thay đổi trong suốt thời gian thực thi chương trình. JavaScript hỗ trợ nhiều kiểu dữ liệu khác nhau như số, chuỗi, boolean, null, undefined, và đối tượng. Việc khai báo biến có thể được thực hiện bằng các từ khóa var, let, và const.
+
+- **Biến**:
   - Ví dụ: Khai báo các biến để lưu trữ thông tin sinh viên như `studentId`, `name`, `dob`, `gender`, `className`.
-- **Kiểu dữ liệu**: Giới thiệu các kiểu dữ liệu cơ bản (số, chuỗi, boolean, null, undefined, object).
+- **Kiểu dữ liệu**:
   - Ví dụ: Sử dụng kiểu chuỗi để lưu trữ tên sinh viên, kiểu số để lưu trữ ngày tháng năm sinh.
 
 ```js
@@ -75,7 +92,10 @@ let student = { id: '12345', name: 'Jane Smith' }; // Đối tượng
 ```
 
 ### 3. Toán tử và biểu thức
-- **Toán tử số học, logic, so sánh**: Giải thích các toán tử cơ bản và cách sử dụng chúng.
+
+Toán tử trong JavaScript là các ký hiệu đặc biệt dùng để thực hiện các phép toán trên các toán hạng. Các toán tử bao gồm toán tử số học, logic, và so sánh. Biểu thức là sự kết hợp giữa các toán tử và toán hạng để tạo ra một giá trị mới.
+
+- **Toán tử số học, logic, so sánh**:
   - Ví dụ: Sử dụng toán tử so sánh để kiểm tra xem `studentId` có trùng lặp hay không.
 - **Biểu thức và câu lệnh**: Cách viết các biểu thức và câu lệnh đơn giản trong JavaScript.
 
@@ -92,9 +112,10 @@ let result = (age > 18) ? 'Adult' : 'Minor'; // Biểu thức điều kiện
 ```
 
 ### 4. Câu lệnh điều kiện
-- **if, else if, else**: Giải thích cách sử dụng các câu lệnh điều kiện.
-  - Ví dụ: Sử dụng câu lệnh `if` để kiểm tra xem `studentId` có tồn tại trong danh sách không trước khi thêm sinh viên.
-- **switch**: Giới thiệu câu lệnh switch và khi nào nên sử dụng.
+
+Câu lệnh điều kiện trong JavaScript cho phép thực thi các đoạn mã khác nhau dựa trên điều kiện đúng hay sai. Các câu lệnh điều kiện bao gồm if, else if, else, và switch, cho phép kiểm tra nhiều điều kiện và thực hiện các hành động tương ứng.
+
+- Ví dụ: Sử dụng câu lệnh `if` để kiểm tra xem `studentId` có tồn tại trong danh sách không trước khi thêm sinh viên.
 
 ```js
 if (age < 13) {
@@ -120,9 +141,10 @@ switch (gender) {
 ```
 
 ### 5. Vòng lặp
-- **for, while, do-while**: Giải thích các vòng lặp cơ bản và cách sử dụng chúng.
-  - Ví dụ: Sử dụng vòng lặp `for` để duyệt qua các hàng trong bảng sinh viên.
-- **break, continue**: Giải thích cách sử dụng break và continue trong vòng lặp.
+
+Vòng lặp trong JavaScript cho phép thực thi một khối mã nhiều lần cho đến khi một điều kiện nhất định được thỏa mãn. Các vòng lặp phổ biến bao gồm for, while, và do-while. Vòng lặp cũng có thể sử dụng các câu lệnh break và continue để điều khiển luồng thực thi.
+
+- Ví dụ: Sử dụng vòng lặp `for` để duyệt qua các hàng trong bảng sinh viên.
 
 ```js
 // Vòng lặp for để duyệt qua các sinh viên
@@ -141,9 +163,10 @@ for (let i = 0; i < students.length; i++) {
 ```
 
 ### 6. Hàm
-- **Định nghĩa và gọi hàm**: Cách tạo và gọi hàm trong JavaScript.
-  - Ví dụ: Tạo các hàm như `addStudent`, `updateStudent`, `deleteStudent` để thực hiện các thao tác tương ứng.
-- **Tham số và giá trị trả về**: Giải thích tham số hàm và giá trị trả về của hàm.
+
+Hàm trong JavaScript là các khối mã được đặt tên và có thể được gọi lại nhiều lần ở bất kỳ đâu trong chương trình. Hàm có thể nhận tham số và trả về giá trị. Chúng giúp mã dễ đọc hơn và tái sử dụng mã.
+
+- Ví dụ: Tạo các hàm như `addStudent`, `updateStudent`, `deleteStudent` để thực hiện các thao tác tương ứng.
 
 ```js
 for (let i = 0; i < students.length; i++) {
@@ -166,9 +189,12 @@ let age = calculateAge('2000-01-01');
 ```
 
 ### 7. Mảng và đối tượng
-- **Mảng**: Giới thiệu về mảng, cách tạo và truy cập các phần tử của mảng.
+
+Mảng trong JavaScript là các danh sách có thứ tự của các phần tử, có thể là bất kỳ kiểu dữ liệu nào. Đối tượng là các thực thể lưu trữ các cặp key-value, cho phép lưu trữ các thuộc tính và phương thức liên quan đến một thực thể cụ thể.
+
+- **Mảng**:
   - Ví dụ: Lưu trữ danh sách sinh viên trong một mảng và sử dụng `localStorage` để lưu trữ mảng này.
-- **Đối tượng**: Giới thiệu về đối tượng, cách tạo và truy cập các thuộc tính và phương thức của đối tượng.
+- **Đối tượng**:
   - Ví dụ: Lưu trữ thông tin sinh viên dưới dạng đối tượng với các thuộc tính như `studentId`, `name`, `dob`, `gender`, `className`.
 
 ```js
@@ -191,7 +217,9 @@ console.log(student.name); // Truy cập thuộc tính name của đối tượn
 ```
 
 ### 8. DOM (Document Object Model)
-- **Khái niệm DOM**: Giới thiệu về DOM và vai trò của nó trong lập trình web.
+
+DOM là một mô hình đối tượng của tài liệu HTML, cho phép JavaScript truy cập và thay đổi nội dung, cấu trúc, và kiểu của trang web. Thông qua DOM, các nhà phát triển có thể thao tác các phần tử HTML, thêm hoặc xóa các phần tử, và thay đổi các thuộc tính của chúng.
+
 - **Truy cập và thao tác DOM**: Cách truy cập và thay đổi các phần tử HTML bằng JavaScript.
   - Ví dụ: Sử dụng `document.getElementById` và `document.querySelector` để truy cập và thay đổi các phần tử trong modal thêm và chỉnh sửa sinh viên.
 
@@ -203,7 +231,10 @@ studentTable.innerHTML = '<tr><td>12345</td><td>John Doe</td></tr>';
 ```
 
 ### 9. Sự kiện (Events)
-- **Xử lý sự kiện**: Giới thiệu về các sự kiện trong JavaScript và cách xử lý chúng.
+
+Sự kiện trong JavaScript là các hành động hoặc xảy ra do tương tác của người dùng hoặc trình duyệt, như nhấp chuột, gửi biểu mẫu, hoặc tải trang. Xử lý sự kiện cho phép các nhà phát triển thực hiện các hành động cụ thể khi sự kiện xảy ra, tạo ra các trang web tương tác và phản hồi.
+
+- **Xử lý sự kiện**:
   - Ví dụ: Xử lý sự kiện `click` khi người dùng nhấn nút "Add Student", "Edit", "Delete".
 - **Các loại sự kiện phổ biến**: Click, submit, change, mouseover, keypress, etc.
 
@@ -212,6 +243,57 @@ studentTable.innerHTML = '<tr><td>12345</td><td>John Doe</td></tr>';
 document.getElementById('addStudentBtn').addEventListener('click', function() {
   openModal('add');
 });
+```
+
+### 10. Web API
+
+Web API cung cấp các giao diện để tương tác với các chức năng của trình duyệt hoặc các dịch vụ web bên ngoài. Các Web API phổ biến bao gồm Fetch API để thực hiện các yêu cầu HTTP, Local Storage API để lưu trữ dữ liệu phía client, và Geolocation API để lấy thông tin vị trí địa lý của thiết bị. Các API này mở rộng khả năng của JavaScript trong việc tương tác với môi trường web.
+
+- Ví dụ về Web API:
+  - **Fetch API:** Sử dụng để thực hiện các yêu cầu HTTP và nhận phản hồi từ máy chủ.
+  - **Local Storage API:** Sử dụng để lưu trữ dữ liệu phía client một cách bền vững.
+  - **Geolocation API:** Sử dụng để lấy thông tin vị trí địa lý của thiết bị.
+
+Ví dụ về Fetch API:
+```js
+// Sử dụng Fetch API để lấy dữ liệu từ một URL
+fetch('https://api.example.com/data')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+```
+
+Ví dụ về Local Storage API:
+```js
+// Lưu trữ dữ liệu vào localStorage
+localStorage.setItem('username', 'JohnDoe');
+
+// Lấy dữ liệu từ localStorage
+let username = localStorage.getItem('username');
+console.log(username); // In ra "JohnDoe"
+
+// Xóa dữ liệu từ localStorage
+localStorage.removeItem('username');
+
+// Xóa tất cả dữ liệu từ localStorage
+localStorage.clear();
+```
+
+Ví dụ về Geolocation API:
+```js
+// Lấy vị trí địa lý hiện tại của thiết bị
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      console.log('Latitude:', position.coords.latitude);
+      console.log('Longitude:', position.coords.longitude);
+    },
+    error => console.error('Error:', error)
+  );
+} else {
+  console.log('Geolocation is not supported by this browser.');
+}
 ```
 
 ## Chức năng của ứng dụng

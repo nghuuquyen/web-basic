@@ -1,3 +1,4 @@
+/* Base styles */
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
@@ -5,6 +6,7 @@ body {
     color: #333;
 }
 
+/* Button styles */
 button {
     padding: 10px 15px;
     background-color: #007bff;
@@ -19,10 +21,12 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Heading styles */
 h1, h2 {
     color: #007bff;
 }
 
+/* Table styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -50,6 +54,7 @@ td button {
     margin-right: 5px;
 }
 
+/* Modal styles */
 .modal {
     display: none;
     position: fixed;
@@ -81,6 +86,7 @@ td button {
     to {opacity: 1;}
 }
 
+/* Modal header styles */
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -106,6 +112,7 @@ td button {
     text-decoration: none;
 }
 
+/* Form styles */
 .form-group {
     margin-bottom: 15px;
 }
@@ -139,6 +146,7 @@ input[type="text"], input[type="date"], select {
     margin-bottom: 0; /* Ensure no margin-bottom for radio button labels */
 }
 
+/* Submit button styles */
 input[type="submit"] {
     background-color: #28a745;
     color: white;
@@ -153,12 +161,14 @@ input[type="submit"]:hover {
     background-color: #218838;
 }
 
+/* Modal button styles */
 .modal-buttons {
     display: flex;
     justify-content: flex-end;
     gap: 10px; /* Add gap between buttons */
 }
 
+/* Confirm delete button styles */
 #confirmDeleteBtn {
     background-color: #dc3545;
 }
@@ -167,6 +177,7 @@ input[type="submit"]:hover {
     background-color: #c82333;
 }
 
+/* Cancel delete button styles */
 #cancelDeleteBtn {
     background: none;
     color: #6c757d;

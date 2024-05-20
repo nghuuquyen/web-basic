@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Components Example</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .task-list {
+            margin-top: 20px;
+        }
+        .task {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .task button {
+            margin-left: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .task button:hover {
+            background-color: #0056b3;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <task-input @add-task="addTask"></task-input>
+        <task-list :tasks="tasks" @remove-task="removeTask" @edit-task="editTask"></task-list>
+
+        <popup v-if="isEditing" @close="isEditing = false">
+            <template v-slot:header>Edit Task</template>
+            <template v-slot:body>
+                <input v-model="currentTask" placeholder="Edit task">
+            </template>
+            <template v-slot:footer>
+                <button @click="saveTask">Save</button>
+                <button @click="isEditing = false">Cancel</button>
+            </template>
+        </popup>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        // Định nghĩa component TaskInput
+        const TaskInput = {
+            template: `
+                <div>
+                    <input v-model="newTask" @keyup.enter="submitTask" placeholder="Enter a new task">
+                    <button @click="submitTask">Add Task</button>
+                </div>
+            `,
+            data() {
+                return {
+                    newTask: ''
+                };
+            },
+            methods: {
+                submitTask() {
+                    if (this.newTask.trim() !== '') {
+                        this.$emit('add-task', this.newTask.trim());
+                        this.newTask = '';
+                    }
+                }
+            }
+        };
+
+        // Định nghĩa component TaskList
+        const TaskList = {
+            props: ['tasks'],
+            template: `
+                <div class="task-list">
+                    <div class="task" v-for="(task, index) in tasks" :key="index">
+                        {{ task }}
+                        <div>
+                            <button @click="editTask(index)">Edit</button>
+                            <button @click="removeTask(index)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            methods: {
+                removeTask(index) {
+                    this.$emit('remove-task', index);
+                },
+                editTask(index) {
+                    this.$emit('edit-task', index);
+                }
+            }
+        };
+
+        // Định nghĩa component Popup
+        const Popup = {
+            template: `
+                <div class="overlay" @click.self="$emit('close')">
+                    <div class="popup">
+                        <header><slot name="header"></slot></header>
+                        <div><slot name="body"></slot></div>
+                        <footer><slot name="footer"></slot></footer>
+                    </div>
+                </div>
+            `
+        };
+
+        // Tạo Vue application và đăng ký các components
+        const app = Vue.createApp({
+            data() {
+                return {
+                    tasks: [], // Danh sách các nhiệm vụ
+                    isEditing: false, // Trạng thái hiển thị popup chỉnh sửa
+                    currentTask: '', // Nội dung nhiệm vụ đang chỉnh sửa
+                    currentIndex: null // Chỉ mục của nhiệm vụ đang chỉnh sửa
+                };
+            },
+            methods: {
+                addTask(task) {
+                    this.tasks.push(task);
+                },
+                removeTask(index) {
+                    this.tasks.splice(index, 1);
+                },
+                editTask(index) {
+                    this.currentIndex = index;
+                    this.currentTask = this.tasks[index];
+                    this.isEditing = true;
+                },
+                saveTask() {
+                    if (this.currentTask.trim() !== '') {
+                        this.tasks[this.currentIndex] = this.currentTask.trim();
+                        this.isEditing = false;
+                        this.currentTask = '';
+                        this.currentIndex = null;
+                    }
+                }
+            }
+        });
+
+        app.component('task-input', TaskInput);
+        app.component('task-list', TaskList);
+        app.component('popup', Popup);
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue List Render</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <h1>Simple List</h1>
+        <!-- Hiển thị danh sách -->
+        <ul>
+            <li v-for="item in items" :key="item">{{ item }}</li>
+        </ul>
+        <!-- Input để thêm mục mới -->
+        <input v-model="newItem" placeholder="Add a new item">
+        <!-- Nút để thêm mục mới vào danh sách -->
+        <button @click="addItem">Add Item</button>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        const app = Vue.createApp({
+            // Dữ liệu của ứng dụng
+            data() {
+                return {
+                    items: ['Item 1', 'Item 2', 'Item 3'], // Danh sách các mục ban đầu
+                    newItem: '' // Biến để lưu giá trị mục mới
+                };
+            },
+            // Các phương thức của ứng dụng
+            methods: {
+                // Phương thức để thêm mục mới vào danh sách
+                addItem() {
+                    if (this.newItem.trim() !== '') {
+                        this.items.push(this.newItem.trim());
+                        this.newItem = ''; // Xóa giá trị input sau khi thêm
+                    }
+                }
+            }
+        });
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

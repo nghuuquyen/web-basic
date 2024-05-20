@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Counter</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <!-- Hiển thị giá trị của counter bằng interpolation -->
+        <h1>{{ counter }}</h1>
+        <!-- Gọi phương thức increment khi nhấn nút -->
+        <button @click="increment">Increment</button>
+        <!-- Gọi phương thức decrement khi nhấn nút -->
+        <button @click="decrement">Decrement</button>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        const app = Vue.createApp({
+            // Dữ liệu của ứng dụng
+            data() {
+                return {
+                    counter: 0 // Giá trị ban đầu của counter là 0
+                };
+            },
+            // Các phương thức của ứng dụng
+            methods: {
+                // Phương thức để tăng giá trị counter
+                increment() {
+                    this.counter++;
+                },
+                // Phương thức để giảm giá trị counter
+                decrement() {
+                    this.counter--;
+                }
+            }
+        });
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

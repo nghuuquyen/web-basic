@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Bindings Example</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        #app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            gap: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <form @submit.prevent="handleSubmit">
+            <!-- Trường nhập liệu text -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" v-model="formData.name">
+
+            <!-- Trường nhập liệu email -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" v-model="formData.email">
+
+            <!-- Trường nhập liệu checkbox -->
+            <label>
+                <input type="checkbox" v-model="formData.subscribe"> Subscribe to newsletter
+            </label>
+
+            <!-- Trường nhập liệu radio buttons -->
+            <div>
+                <label>Gender:</label>
+                <label>
+                    <input type="radio" value="Male" v-model="formData.gender"> Male
+                </label>
+                <label>
+                    <input type="radio" value="Female" v-model="formData.gender"> Female
+                </label>
+            </div>
+
+            <!-- Trường nhập liệu select -->
+            <label for="country">Country:</label>
+            <select id="country" v-model="formData.country">
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">UK</option>
+            </select>
+
+            <!-- Nút nộp biểu mẫu -->
+            <div>
+                <button type="submit">Submit</button>
+                <button type="button" @click="randomFill">Random Fill</button>
+            </div>
+        </form>
+
+        <!-- Hiển thị dữ liệu đã nộp -->
+        <div class="output" v-if="submitted">
+            <h3>Submitted Data:</h3>
+            <p><strong>Name:</strong> {{ formData.name }}</p>
+            <p><strong>Email:</strong> {{ formData.email }}</p>
+            <p><strong>Subscribed:</strong> {{ formData.subscribe ? 'Yes' : 'No' }}</p>
+            <p><strong>Gender:</strong> {{ formData.gender }}</p>
+            <p><strong>Country:</strong> {{ formData.country }}</p>
+        </div>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        const app = Vue.createApp({
+            // Dữ liệu của ứng dụng
+            data() {
+                return {
+                    formData: {
+                        name: '',
+                        email: '',
+                        subscribe: false,
+                        gender: '',
+                        country: 'USA'
+                    },
+                    submitted: false
+                };
+            },
+            // Các phương thức của ứng dụng
+            methods: {
+                // Xử lý sự kiện nộp biểu mẫu
+                handleSubmit() {
+                    this.submitted = true;
+                },
+                // Điền dữ liệu ngẫu nhiên vào biểu mẫu
+                randomFill() {
+                    this.submitted = false;
+                    
+                    const randomNames = ['John Doe', 'Jane Smith', 'Alice Johnson', 'Bob Brown'];
+                    const randomEmails = ['john@example.com', 'jane@example.com', 'alice@example.com', 'bob@example.com'];
+                    const randomGender = ['Male', 'Female'];
+                    const randomCountry = ['USA', 'Canada', 'UK'];
+
+                    this.formData.name = randomNames[Math.floor(Math.random() * randomNames.length)];
+                    this.formData.email = randomEmails[Math.floor(Math.random() * randomEmails.length)];
+                    this.formData.subscribe = Math.random() > 0.5;
+                    this.formData.gender = randomGender[Math.floor(Math.random() * randomGender.length)];
+                    this.formData.country = randomCountry[Math.floor(Math.random() * randomCountry.length)];
+                }
+            }
+        });
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

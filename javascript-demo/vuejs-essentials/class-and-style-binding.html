@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class and Style Bindings Example</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .btn-primary {
+            background-color: blue;
+            color: white;
+        }
+        .btn-danger {
+            background-color: red;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: gray;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <h1>Class and Style Bindings</h1>
+
+        <!-- Radio Buttons để chọn class -->
+        <label>
+            <input type="radio" value="btn-primary" v-model="buttonClass"> Primary
+        </label>
+        <label>
+            <input type="radio" value="btn-danger" v-model="buttonClass"> Danger
+        </label>
+        <label>
+            <input type="radio" value="btn-secondary" v-model="buttonClass"> Secondary
+        </label>
+
+        <!-- Input Range để thay đổi font-size -->
+        <div>
+            <label for="fontSize">Font Size: {{ fontSize }}px</label>
+            <input type="range" id="fontSize" min="10" max="50" v-model="fontSize">
+        </div>
+
+        <!-- Button sẽ thay đổi class và font-size -->
+        <button :class="buttonClass" :style="{ fontSize: fontSize + 'px' }">
+            Sample Button
+        </button>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        const app = Vue.createApp({
+            // Dữ liệu của ứng dụng
+            data() {
+                return {
+                    buttonClass: 'btn-primary', // Class ban đầu của button
+                    fontSize: 16 // Kích thước font ban đầu của button
+                };
+            }
+        });
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

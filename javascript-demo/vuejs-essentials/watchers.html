@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Info Search</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        #app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            width: 300px;
+        }
+        .country-info {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 300px;
+            text-align: left;
+        }
+        .country-info img {
+            width: 32px;
+            height: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<!-- Ví dụ sử dụng Watchers trong Vue 3. Ứng dụng này sẽ bắt đầu tìm kiếm thông tin về quốc gia khi người dùng dừng nhập liệu trong 3 giây. -->
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <p>
+            Enter a country name:
+            <input v-model="countryName" :disabled="loading" />
+        </p>
+        <div v-if="loading">Loading...</div>
+        <div v-if="error">{{ error }}</div>
+        <div v-for="country in countries" :key="country.cca2" class="country-info">
+            <div><strong>Official Name:</strong> {{ country.name.official }}</div>
+            <div><strong>Country Code:</strong> {{ country.cca2 }}</div>
+            <div><strong>Flag:</strong> <img :src="country.flags.png" :alt="country.name.official" /></div>
+            <div><strong>Population:</strong> {{ country.population.toLocaleString() }}</div>
+        </div>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    countryName: '', // Tên quốc gia nhập vào
+                    countries: [], // Danh sách các quốc gia tìm được
+                    loading: false, // Trạng thái tải dữ liệu
+                    error: '', // Thông báo lỗi
+                    searchTimeout: null // Timeout để theo dõi việc dừng nhập liệu
+                };
+            },
+            watch: {
+                // Theo dõi sự thay đổi của biến countryName
+                countryName(newCountryName) {
+                    if (this.searchTimeout) {
+                        clearTimeout(this.searchTimeout);
+                    }
+                    // Đặt timeout để chờ 3 giây sau khi người dùng dừng nhập liệu
+                    this.searchTimeout = setTimeout(() => {
+                        this.searchCountry();
+                    }, 3000);
+                }
+            },
+            methods: {
+                async searchCountry() {
+                    const query = this.countryName.trim();
+
+                    if (!query) {
+                        this.error = 'Please enter a country name.';
+                        return;
+                    }
+
+                    this.loading = true;
+                    this.error = '';
+                    this.countries = [];
+
+                    try {
+                        const res = await fetch(`https://restcountries.com/v3.1/name/${query}?fullText=true`);
+                        if (!res.ok) {
+                            throw new Error('Country not found');
+                        }
+                        const data = await res.json();
+                        this.countries = data;
+                    } catch (error) {
+                        this.error = 'Error! Could not fetch the country information. ' + error.message;
+                    } finally {
+                        this.loading = false;
+                    }
+                }
+            }
+        });
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

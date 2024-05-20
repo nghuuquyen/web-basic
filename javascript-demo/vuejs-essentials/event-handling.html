@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling Example</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        #app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<!-- Đây là một ví dụ về xử lý sự kiện trong Vue.js 3. Chúng ta sẽ tạo một biểu mẫu (form) đơn giản với một trường nhập liệu (input field) và một nút (button). Khi người dùng nhập dữ liệu vào trường nhập liệu và nhấn nút, nội dung nhập vào sẽ được hiển thị bên dưới biểu mẫu. -->
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <form @submit.prevent="handleSubmit">
+            <input type="text" v-model="inputText" placeholder="Enter some text">
+            <button type="submit">Submit</button>
+        </form>
+        <div class="output" v-if="submittedText">
+            You entered: {{ submittedText }}
+        </div>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        const app = Vue.createApp({
+            // Dữ liệu của ứng dụng
+            data() {
+                return {
+                    inputText: '', // Nội dung trường nhập liệu
+                    submittedText: '' // Nội dung đã được nộp
+                };
+            },
+            // Các phương thức của ứng dụng
+            methods: {
+                // Xử lý sự kiện nộp biểu mẫu
+                handleSubmit() {
+                    this.submittedText = this.inputText;
+                    this.inputText = ''; // Xóa nội dung trường nhập liệu sau khi nộp
+                }
+            }
+        });
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

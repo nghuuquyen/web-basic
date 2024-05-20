@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Conditional Rendering - Tabs</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .tabs {
+            display: flex;
+            cursor: pointer;
+        }
+        .tab {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background-color: #f1f1f1;
+        }
+        .tab.active {
+            background-color: white;
+            font-weight: bold;
+        }
+        .tab-content {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <h1>Tabs Example</h1>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab" :class="{ active: selectedTab === 'tab1' }" @click="selectedTab = 'tab1'">Tab 1</div>
+            <div class="tab" :class="{ active: selectedTab === 'tab2' }" @click="selectedTab = 'tab2'">Tab 2</div>
+            <div class="tab" :class="{ active: selectedTab === 'tab3' }" @click="selectedTab = 'tab3'">Tab 3</div>
+        </div>
+
+        <!-- Nội dung của Tabs -->
+        <div class="tab-content" v-if="selectedTab === 'tab1'">
+            <h2>Content for Tab 1</h2>
+            <p>This is the content for Tab 1.</p>
+        </div>
+        <div class="tab-content" v-if="selectedTab === 'tab2'">
+            <h2>Content for Tab 2</h2>
+            <p>This is the content for Tab 2.</p>
+        </div>
+        <div class="tab-content" v-if="selectedTab === 'tab3'">
+            <h2>Content for Tab 3</h2>
+            <p>This is the content for Tab 3.</p>
+        </div>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        const app = Vue.createApp({
+            // Dữ liệu của ứng dụng
+            data() {
+                return {
+                    selectedTab: 'tab1' // Tab ban đầu được chọn
+                };
+            }
+        });
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

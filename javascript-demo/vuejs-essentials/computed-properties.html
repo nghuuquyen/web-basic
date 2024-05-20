@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Computed Search Example</title>
+    <!-- Thêm Vue.js từ CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Phần tử gốc mà Vue instance sẽ gắn vào -->
+    <div id="app">
+        <h1>Searchable Table</h1>
+        <!-- Input để nhập từ khóa tìm kiếm -->
+        <input v-model="searchQuery" placeholder="Search...">
+        <!-- Hiển thị bảng dữ liệu -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Lặp qua các mục đã được lọc và hiển thị trong bảng -->
+                <tr v-for="item in filteredItems" :key="item.name">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.age }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Tạo Vue application -->
+    <script>
+        const app = Vue.createApp({
+            // Dữ liệu của ứng dụng
+            data() {
+                return {
+                    searchQuery: '', // Biến để lưu từ khóa tìm kiếm
+                    items: [
+                        { name: 'Alice', age: 25 },
+                        { name: 'Bob', age: 30 },
+                        { name: 'Charlie', age: 35 },
+                        { name: 'David', age: 40 }
+                    ] // Danh sách các mục
+                };
+            },
+            // Các thuộc tính computed
+            computed: {
+                // Tính toán và trả về các mục đã được lọc theo từ khóa tìm kiếm
+                filteredItems() {
+                    return this.items.filter(item => {
+                        return item.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+                    });
+                }
+            }
+        });
+
+        // Gắn ứng dụng Vue vào phần tử có id là 'app'
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

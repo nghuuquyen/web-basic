@@ -28,23 +28,25 @@ document.addEventListener('DOMContentLoaded', () => {
     studentForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const formAction = document.getElementById('formAction').value;
-        const studentId = document.getElementById('studentId').value;
-        const name = document.getElementById('name').value;
-        const dob = document.getElementById('dob').value;
-        const gender = document.querySelector('input[name="gender"]:checked').value;
-        const className = document.getElementById('class').value;
+        const student = {
+            studentId: document.getElementById('studentId').value,
+            name: document.getElementById('name').value,
+            dob: document.getElementById('dob').value,
+            gender: document.querySelector('input[name="gender"]:checked').value,
+            className: document.getElementById('class').value
+        };
 
         // Check for duplicate student ID if adding a new student
-        if (formAction === 'add' && isDuplicateStudentId(studentId)) {
+        if (formAction === 'add' && isDuplicateStudentId(student.studentId)) {
             alert('Student ID already exists!');
             return;
         }
 
         // Add or update the student based on the form action
         if (formAction === 'add') {
-            addStudent(studentId, name, dob, gender, className);
+            addStudent(student);
         } else {
-            updateStudent(studentId, name, dob, gender, className);
+            updateStudent(student);
         }
 
         // Save the updated student list to localStorage
@@ -64,16 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelDeleteBtn.addEventListener('click', closeModal);
 
     // Open the modal with appropriate action (add or edit)
-    function openModal(action, studentId = '', name = '', dob = '', gender = 'Unspecified', className = 'Class A') {
+    function openModal(action, student = { studentId: '', name: '', dob: '', gender: 'Unspecified', className: 'Class A' }) {
         document.getElementById('formAction').value = action;
         studentModalTitle.textContent = action === 'add' ? 'Add Student' : 'Edit Student';
         const studentIdInput = document.getElementById('studentId');
         studentIdInput.readOnly = (action === 'edit');
-        studentIdInput.value = studentId;
-        document.getElementById('name').value = name;
-        document.getElementById('dob').value = dob;
-        document.querySelector(`input[name="gender"][value="${gender}"]`).checked = true;
-        document.getElementById('class').value = className;
+        studentIdInput.value = student.studentId;
+        document.getElementById('name').value = student.name;
+        document.getElementById('dob').value = student.dob;
+        document.querySelector(`input[name="gender"][value="${student.gender}"]`).checked = true;
+        document.getElementById('class').value = student.className;
         studentModal.style.display = 'block';
     }
 
@@ -105,30 +107,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Add a new student to the table
-    function addStudent(studentId, name, dob, gender, className) {
+    function addStudent(student) {
         const newRow = studentTableBody.insertRow();
         newRow.innerHTML = `
-            <td>${studentId}</td>
-            <td>${name}</td>
-            <td>${dob}</td>
-            <td>${gender}</td>
-            <td>${className}</td>
+            <td>${student.studentId}</td>
+            <td>${student.name}</td>
+            <td>${student.dob}</td>
+            <td>${student.gender}</td>
+            <td>${student.className}</td>
             <td>
                 <button onclick="editStudent(this)">Edit</button>
-                <button onclick="confirmDelete(this)">Delete</button>
+                <button class="btn-danger" onclick="confirmDelete(this)">Delete</button>
             </td>
         `;
     }
 
     // Update an existing student in the table
-    function updateStudent(studentId, name, dob, gender, className) {
+    function updateStudent(student) {
         const rows = studentTableBody.rows;
         for (let i = 0; i < rows.length; i++) {
-            if (rows[i].cells[0].innerText === studentId) {
-                rows[i].cells[1].innerText = name;
-                rows[i].cells[2].innerText = dob;
-                rows[i].cells[3].innerText = gender;
-                rows[i].cells[4].innerText = className;
+            if (rows[i].cells[0].innerText === student.studentId) {
+                rows[i].cells[1].innerText = student.name;
+                rows[i].cells[2].innerText = student.dob;
+                rows[i].cells[3].innerText = student.gender;
+                rows[i].cells[4].innerText = student.className;
                 break;
             }
         }
@@ -137,13 +139,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Edit an existing student
     window.editStudent = (button) => {
         const row = button.parentNode.parentNode;
-        const studentId = row.cells[0].innerText;
-        const name = row.cells[1].innerText;
-        const dob = row.cells[2].innerText;
-        const gender = row.cells[3].innerText;
-        const className = row.cells[4].innerText;
+        const student = {
+            studentId: row.cells[0].innerText,
+            name: row.cells[1].innerText,
+            dob: row.cells[2].innerText,
+            gender: row.cells[3].innerText,
+            className: row.cells[4].innerText
+        };
 
-        openModal('edit', studentId, name, dob, gender, className);
+        openModal('edit', student);
     };
 
     // Confirm deletion of a student
@@ -166,12 +170,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const students = [];
         const rows = studentTableBody.rows;
         for (let i = 0; i < rows.length; i++) {
-            const studentId = rows[i].cells[0].innerText;
-            const name = rows[i].cells[1].innerText;
-            const dob = rows[i].cells[2].innerText;
-            const gender = rows[i].cells[3].innerText;
-            const className = rows[i].cells[4].innerText;
-            students.push({ studentId, name, dob, gender, className });
+            const student = {
+                studentId: rows[i].cells[0].innerText,
+                name: rows[i].cells[1].innerText,
+                dob: rows[i].cells[2].innerText,
+                gender: rows[i].cells[3].innerText,
+                className: rows[i].cells[4].innerText
+            };
+            students.push(student);
         }
         localStorage.setItem('students', JSON.stringify(students));
     }
@@ -187,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadStudents() {
         const students = JSON.parse(localStorage.getItem('students')) || [];
         students.forEach(student => {
-            addStudent(student.studentId, student.name, student.dob, student.gender, student.className);
+            addStudent(student);
         });
     }
 });

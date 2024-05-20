@@ -21,6 +21,49 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* General button styles */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Danger button styles */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Secondary button styles */
+.btn-secondary {
+    background: none;
+    color: #6c757d;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-secondary:hover {
+    text-decoration: underline;
+    color: #5a6268;
+}
+
 /* Heading styles */
 h1, h2 {
     color: #007bff;
@@ -166,28 +209,4 @@ input[type="submit"]:hover {
     display: flex;
     justify-content: flex-end;
     gap: 10px; /* Add gap between buttons */
-}
-
-/* Confirm delete button styles */
-#confirmDeleteBtn {
-    background-color: #dc3545;
-}
-
-#confirmDeleteBtn:hover {
-    background-color: #c82333;
-}
-
-/* Cancel delete button styles */
-#cancelDeleteBtn {
-    background: none;
-    color: #6c757d;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-#cancelDeleteBtn:hover {
-    text-decoration: underline;
-    color: #5a6268;
 }

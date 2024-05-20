@@ -1,3 +1,6 @@
+# Hướng Dẫn Cơ Bản Về Vue.js 3
+![Homepage](vue-logo.png)
+
 Các ví dụ dưới đây sẽ giúp các em khám phá các khái niệm cốt lõi của Vue.js, giúp xây dựng các ứng dụng web mạnh mẽ và linh hoạt. Tại mỗi mục đều có link đến Offical Docs của Vue.js các em có thể đọc lướt qua trước để nắm cơ bản, sau đó đọc các ví dụ của anh để hiểu dễ hơn.
 
 Tuy nhiên có một lưu ý đó là trong các ví dụ này, anh sử dụng Vue từ CDN thay vì cài đặt các công cụ build để sử dụng Single-File Components (SFC). Việc này giúp thiết lập trở nên đơn giản hơn, vì chỉ cần thêm một dòng `<script>` vào tệp HTML mà không cần cài đặt thêm phần mềm hay chạy các lệnh build phức tạp. 

@@ -68,14 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Open the modal with appropriate action (add or edit)
     function openModal(action, student = { studentId: '', name: '', dob: '', gender: 'Unspecified', className: 'Class A' }) {
         document.getElementById('formAction').value = action;
+
         studentModalTitle.textContent = action === 'add' ? 'Add Student' : 'Edit Student';
+
         const studentIdInput = document.getElementById('studentId');
         studentIdInput.readOnly = (action === 'edit');
         studentIdInput.value = student.studentId;
+
         document.getElementById('name').value = student.name;
         document.getElementById('dob').value = student.dob;
         document.querySelector(`input[name="gender"][value="${student.gender}"]`).checked = true;
         document.getElementById('class').value = student.className;
+
         studentModal.style.display = 'block';
     }
 

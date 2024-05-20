@@ -215,7 +215,7 @@ console.log(student.name); // Truy cập thuộc tính name của đối tượn
 
 ### 8. DOM (Document Object Model)
 
-DOM là một mô hình đối tượng của tài liệu HTML, cho phép JavaScript truy cập và thay đổi nội dung, cấu trúc, và kiểu của trang web. Thông qua DOM, các nhà phát triển có thể thao tác các phần tử HTML, thêm hoặc xóa các phần tử, và thay đổi các thuộc tính của chúng.
+DOM cho phép JavaScript truy cập và thay đổi nội dung, cấu trúc, và kiểu của trang web. Thông qua DOM, các nhà phát triển có thể thao tác các phần tử HTML, thêm hoặc xóa các phần tử, và thay đổi các thuộc tính của chúng.
 
 - **Truy cập và thao tác DOM**: Cách truy cập và thay đổi các phần tử HTML bằng JavaScript.
   - Ví dụ: Sử dụng `document.getElementById` và `document.querySelector` để truy cập và thay đổi các phần tử trong modal thêm và chỉnh sửa sinh viên.

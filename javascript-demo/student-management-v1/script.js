@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${student.gender}</td>
             <td>${student.className}</td>
             <td>
-                <button onclick="editStudent(this)">Edit</button>
+                <button class="btn-primary" onclick="editStudent(this)">Edit</button>
                 <button class="btn-danger" onclick="confirmDelete(this)">Delete</button>
             </td>
         `;

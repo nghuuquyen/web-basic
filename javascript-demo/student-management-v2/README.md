@@ -7,7 +7,7 @@ Trong dự án quản lý sinh viên trước đây, chúng ta đã sử dụng 
 ### Hạn chế của JavaScript thuần
 - **Khó quản lý trạng thái ứng dụng:** Với JavaScript thuần, việc quản lý trạng thái của các thành phần trong ứng dụng (ví dụ như danh sách sinh viên, thông tin sinh viên, v.v.) trở nên phức tạp khi phải thao tác trực tiếp với DOM.
 - **Xử lý sự kiện thủ công:** Việc gán và xử lý sự kiện trực tiếp trên các phần tử DOM dẫn đến mã nguồn dễ bị lỗi và khó bảo trì. Ví dụ, mở modal thêm/sửa sinh viên, đóng modal, và xử lý các sự kiện submit form đều phải được thực hiện thủ công.
-- **Cập nhật DOM không hiệu quả:** Khi dữ liệu thay đổi, chúng ta phải cập nhật DOM thủ công, dễ dẫn đến lỗi và giảm hiệu suất khi ứng dụng phát triển.
+- **Cập nhật DOM không hiệu quả:** Khi dữ liệu thay đổi, chúng ta phải cập nhật DOM thủ công, dễ dẫn đến lỗi và giảm hiệu suất khi phát triển ứng dụng.
 
 ### Lợi ích khi chuyển sang Vue.js
 - **Quản lý trạng thái ứng dụng dễ dàng hơn:** Vue.js cung cấp cơ chế reactive, giúp tự động cập nhật giao diện khi dữ liệu thay đổi. Điều này giúp việc quản lý trạng thái của ứng dụng dễ dàng hơn.

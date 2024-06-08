@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="app">
+    <h1>Student Management System (V3)</h1>
+    <button class="btn-primary" onclick="openModal('add')">Add Student</button>
+    <h2>Student List</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Class</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% students.forEach(student => { %>
+            <tr>
+                <td><%= student.studentId %></td>
+                <td><%= student.name %></td>
+                <td><%= student.dob %></td>
+                <td><%= student.gender %></td>
+                <td><%= student.className %></td>
+                <td>
+                    <button class="btn-primary" onclick="openModal('edit', '<%= student.studentId %>')">Edit</button>
+                    <button class="btn-danger" onclick="openModal('delete', '<%= student.studentId %>')">Delete</button>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal" id="student-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modal-title"></h2>
+            </div>
+            <form id="student-form" action="/add-student" method="POST">
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="text" id="studentId" name="studentId" placeholder="Student ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Student Name</label>
+                    <input type="text" id="name" name="name" placeholder="Student Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <div class="gender-container">
+                        <input type="radio" id="male" name="gender" value="Male">
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" name="gender" value="Female">
+                        <label for="female">Female</label>
+                        <input type="radio" id="unspecified" name="gender" value="Unspecified">
+                        <label for="unspecified">Unspecified</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="className">Class:</label>
+                    <select id="className" name="className" required>
+                        <option value="Class A">Class A</option>
+                        <option value="Class B">Class B</option>
+                        <option value="Class C">Class C</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('delete-modal')">&times;</span>
+                <h2>Confirm Delete</h2>
+            </div>
+            <p>Are you sure you want to delete this student?</p>
+            <div class="modal-buttons">
+                <button class="btn-secondary" onclick="closeModal('delete-modal')">Cancel</button>
+                <form id="delete-form" action="/delete-student" method="POST" style="display:inline;">
+                    <input type="hidden" name="studentId" id="delete-studentId">
+                    <button type="submit" class="btn-danger">Yes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(action, studentId = null) {
+        if (action === 'delete') {
+            document.getElementById('delete-studentId').value = studentId;
+            document.getElementById('delete-modal').style.display = 'block';
+        } else {
+            document.getElementById('student-form').action = action === 'add' ? '/add-student' : '/edit-student';
+            document.getElementById('modal-title').innerText = action === 'add' ? 'Add Student' : 'Edit Student';
+            document.getElementById('studentId').readOnly = action === 'edit';
+            if (action === 'edit' && studentId) {
+                const student = Array.from(document.querySelectorAll('tbody tr')).find(row => row.firstChild.innerText === studentId);
+                document.getElementById('studentId').value = student.children[0].innerText;
+                document.getElementById('name').value = student.children[1].innerText;
+                document.getElementById('dob').value = student.children[2].innerText;
+                document.getElementById('className').value = student.children[4].innerText;
+                document.querySelector(`input[name="gender"][value="${student.children[3].innerText}"]`).checked = true;
+            } else {
+                document.getElementById('student-form').reset();
+            }
+            document.getElementById('student-modal').style.display = 'block';
+        }
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+</script>
+</body>
+</html>

@@ -32,7 +32,7 @@
                 <td><%= student.className %></td>
                 <td>
                     <button class="btn-primary" onclick="openModal('edit', '<%= student.studentId %>')">Edit</button>
-                    <button class="btn-danger" onclick="openModal('delete', '<%= student.studentId %>')">Delete</button>
+                    <button class="btn-danger" onclick="confirmDelete('<%= student.studentId %>')">Delete</button>
                 </td>
             </tr>
         <% }); %>
@@ -102,32 +102,6 @@
     </div>
 </div>
 
-<script>
-    function openModal(action, studentId = null) {
-        if (action === 'delete') {
-            document.getElementById('delete-studentId').value = studentId;
-            document.getElementById('delete-modal').style.display = 'block';
-        } else {
-            document.getElementById('student-form').action = action === 'add' ? '/add-student' : '/edit-student';
-            document.getElementById('modal-title').innerText = action === 'add' ? 'Add Student' : 'Edit Student';
-            document.getElementById('studentId').readOnly = action === 'edit';
-            if (action === 'edit' && studentId) {
-                const student = Array.from(document.querySelectorAll('tbody tr')).find(row => row.firstChild.innerText === studentId);
-                document.getElementById('studentId').value = student.children[0].innerText;
-                document.getElementById('name').value = student.children[1].innerText;
-                document.getElementById('dob').value = student.children[2].innerText;
-                document.getElementById('className').value = student.children[4].innerText;
-                document.querySelector(`input[name="gender"][value="${student.children[3].innerText}"]`).checked = true;
-            } else {
-                document.getElementById('student-form').reset();
-            }
-            document.getElementById('student-modal').style.display = 'block';
-        }
-    }
-
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-    }
-</script>
+<script src="/script.js"></script>
 </body>
 </html>

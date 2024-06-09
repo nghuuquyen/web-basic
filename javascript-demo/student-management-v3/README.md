@@ -1,4 +1,6 @@
-# Student Management System
+# Student Management System (v3)
+
+![Homepage](homepage.png)
 
 ## Introduction
 

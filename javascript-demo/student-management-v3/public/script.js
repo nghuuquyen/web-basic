@@ -1,3 +1,5 @@
+'use strict';
+
 async function openModal(action, studentId = null) {
     document.getElementById('student-form').action = action === 'add' ? '/add-student' : '/edit-student';
     document.getElementById('modal-title').innerText = action === 'add' ? 'Add Student' : 'Edit Student';
@@ -13,7 +15,7 @@ async function openModal(action, studentId = null) {
             document.getElementById('studentId').value = student.studentId;
             document.getElementById('name').value = student.name;
             document.getElementById('dob').value = student.dob;
-            document.getElementById('className').value = student.className;
+            document.getElementById('classId').value = student.class.id;
             document.querySelector(`input[name="gender"][value="${student.gender}"]`).checked = true;
         } catch (error) {
             console.error('Error fetching student data:', error);

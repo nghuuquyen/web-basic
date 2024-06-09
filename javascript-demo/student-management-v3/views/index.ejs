@@ -29,7 +29,7 @@
                 <td><%= student.name %></td>
                 <td><%= student.dob %></td>
                 <td><%= student.gender %></td>
-                <td><%= student.className %></td>
+                <td><%= student.class.name %></td>
                 <td>
                     <button class="btn-primary" onclick="openModal('edit', '<%= student.studentId %>')">Edit</button>
                     <button class="btn-danger" onclick="confirmDelete('<%= student.studentId %>')">Delete</button>
@@ -43,7 +43,7 @@
     <div class="modal" id="student-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close" onclick="closeModal()">&times;</span>
+                <span class="close" onclick="closeModal('student-modal')">&times;</span>
                 <h2 id="modal-title"></h2>
             </div>
             <form id="student-form" action="/add-student" method="POST">
@@ -71,11 +71,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="className">Class:</label>
-                    <select id="className" name="className" required>
-                        <option value="Class A">Class A</option>
-                        <option value="Class B">Class B</option>
-                        <option value="Class C">Class C</option>
+                    <label for="classId">Class:</label>
+                    <select id="classId" name="classId" required>
+                        <% classes.forEach(function(classItem) { %>
+                            <option value="<%= classItem.id %>"><%= classItem.name %></option>
+                        <% }) %>
                     </select>
                 </div>
                 <button type="submit" class="btn-primary">Save</button>

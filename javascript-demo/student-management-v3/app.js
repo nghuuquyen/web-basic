@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const {sequelize, Student} = require('./models');
+const {sequelize, Student, Class} = require('./models');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -21,19 +21,36 @@ app.use(session({
 }));
 
 app.get('/', async (req, res) => {
-    const students = await Student.findAll();
-    res.render('index', {students});
+    const students = await Student.findAll({
+        include: {
+            model: Class,
+            as: "class",
+            attributes: ['id', 'name']  // Include only the 'name' attribute of the 'Class' model
+        }
+    });
+    const classes = await Class.findAll();
+
+    res.render('index', {students, classes});
 });
 
 app.post('/add-student', async (req, res) => {
-    const {studentId, name, dob, gender, className} = req.body;
-    await Student.create({studentId, name, dob, gender, className});
+    const {studentId, name, dob, gender, classId} = req.body;
+    await Student.create({studentId, name, dob, gender, classId});
     res.redirect('/');
 });
 
 app.get('/api/student/:studentId', async (req, res) => {
     try {
-        const student = await Student.findOne({where: {studentId: req.params.studentId}});
+        const student = await Student.findOne({
+            where: {
+                studentId: req.params.studentId
+            },
+            include: {
+                model: Class,
+                as: "class",
+                attributes: ['id', 'name']  // Include only the 'name' attribute of the 'Class' model
+            }
+        });
         if (student) {
             res.json(student);
         } else {
@@ -45,8 +62,8 @@ app.get('/api/student/:studentId', async (req, res) => {
 });
 
 app.post('/edit-student', async (req, res) => {
-    const {studentId, name, dob, gender, className} = req.body;
-    await Student.update({name, dob, gender, className}, {where: {studentId}});
+    const {studentId, name, dob, gender, classId} = req.body;
+    await Student.update({name, dob, gender, classId}, {where: {studentId}});
     res.redirect('/');
 });
 

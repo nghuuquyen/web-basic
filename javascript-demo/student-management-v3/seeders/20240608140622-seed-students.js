@@ -9,7 +9,7 @@ module.exports = {
                 name: 'Student 1',
                 dob: '2000-01-01',
                 gender: 'Male',
-                className: 'Class A',
+                classId: 1,
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
@@ -18,7 +18,7 @@ module.exports = {
                 name: 'Student 2',
                 dob: '2000-05-02',
                 gender: 'Male',
-                className: 'Class B',
+                classId: 2,
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
@@ -27,7 +27,7 @@ module.exports = {
                 name: 'Student 3',
                 dob: '2000-06-03',
                 gender: 'Female',
-                className: 'Class C',
+                classId: 3,
                 createdAt: new Date(),
                 updatedAt: new Date()
             },

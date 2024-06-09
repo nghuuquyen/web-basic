@@ -11,10 +11,10 @@ module.exports = {
             type: Sequelize.INTEGER,
             references: {
                 model: 'Classes',
-                key: 'id'
+                key: 'id',
             },
             onUpdate: 'CASCADE',
-            onDelete: 'SET NULL'
+            onDelete: 'SET NULL',
         });
     },
 
@@ -22,10 +22,10 @@ module.exports = {
         // Add column className back
         await queryInterface.addColumn('students', 'className', {
             type: Sequelize.STRING,
-            allowNull: true
+            allowNull: true,
         });
 
         // Remove new added column classId
         await queryInterface.removeColumn('students', 'classId');
-    }
+    },
 };

@@ -8,35 +8,35 @@ module.exports = {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
             },
             studentId: {
                 type: Sequelize.STRING,
-                unique: true
+                unique: true,
             },
             name: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
             },
             dob: {
-                type: Sequelize.DATEONLY
+                type: Sequelize.DATEONLY,
             },
             gender: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
             },
             className: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
             },
             createdAt: {
                 allowNull: false,
-                type: Sequelize.DATE
+                type: Sequelize.DATE,
             },
             updatedAt: {
                 allowNull: false,
-                type: Sequelize.DATE
-            }
+                type: Sequelize.DATE,
+            },
         });
     },
     async down(queryInterface, Sequelize) {
         await queryInterface.dropTable('students');
-    }
+    },
 };

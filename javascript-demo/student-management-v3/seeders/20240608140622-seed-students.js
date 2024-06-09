@@ -11,7 +11,7 @@ module.exports = {
                 gender: 'Male',
                 classId: 1,
                 createdAt: new Date(),
-                updatedAt: new Date()
+                updatedAt: new Date(),
             },
             {
                 studentId: '1000002',
@@ -20,7 +20,7 @@ module.exports = {
                 gender: 'Male',
                 classId: 2,
                 createdAt: new Date(),
-                updatedAt: new Date()
+                updatedAt: new Date(),
             },
             {
                 studentId: '1000003',
@@ -29,7 +29,7 @@ module.exports = {
                 gender: 'Female',
                 classId: 3,
                 createdAt: new Date(),
-                updatedAt: new Date()
+                updatedAt: new Date(),
             },
         ];
 
@@ -38,5 +38,5 @@ module.exports = {
 
     async down(queryInterface, Sequelize) {
         return queryInterface.bulkDelete('students', null, {});
-    }
+    },
 };

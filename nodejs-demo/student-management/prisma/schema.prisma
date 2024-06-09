@@ -1,6 +1,5 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
@@ -15,12 +14,12 @@ datasource db {
 
 model Student {
   id         Int      @id @default(autoincrement())
-  student_id String   @unique
+  studentId  String   @unique @map("student_id")
   name       String
   dob        String
   gender     String
-  class_id   Int
-  class      Class    @relation(fields: [class_id], references: [id])
+  classId    Int      @map("class_id")
+  class      Class    @relation(fields: [classId], references: [id])
 
   @@map("students")
 }

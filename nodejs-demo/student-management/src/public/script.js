@@ -25,11 +25,11 @@ const app = Vue.createApp({
             if (action === 'edit' && id) {
                 try {
                     this.fetchStudent(id).then((student) => {
-                        this.studentForm.studentId = student.student_id;
+                        this.studentForm.studentId = student.studentId;
                         this.studentForm.name = student.name;
                         this.studentForm.dob = student.dob;
                         this.studentForm.gender = student.gender;
-                        this.studentForm.classId = student.class_id;
+                        this.studentForm.classId = student.classId;
                     });
                 } catch (error) {
                     console.error('Error fetching student data:', error);

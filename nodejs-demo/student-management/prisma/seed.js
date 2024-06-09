@@ -18,31 +18,31 @@ async function main() {
     // Create students
     await prisma.student.create({
         data: {
-            student_id: 'S001',
+            studentId: 'S001',
             name: 'John Doe',
             gender: 'Male',
             dob: '2000-01-01',
-            class_id: classA.id,
+            classId: classA.id,
         },
     });
 
     await prisma.student.create({
         data: {
-            student_id: 'S002',
+            studentId: 'S002',
             name: 'Jane Smith',
             gender: 'Female',
             dob: '2001-02-02',
-            class_id: classB.id,
+            classId: classB.id,
         },
     });
 
     await prisma.student.create({
         data: {
-            student_id: 'S003',
+            studentId: 'S003',
             name: 'Alex Johnson',
             gender: 'Male',
             dob: '2002-03-03',
-            class_id: classC.id,
+            classId: classC.id,
         },
     });
 

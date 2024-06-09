@@ -8,10 +8,10 @@ exports.getStudents = async (req, res) => {
 };
 
 exports.getStudentById = async (req, res) => {
-    const { id } = req.params;
+    const { studentId } = req.params;
 
     const student = await prisma.student.findUnique({
-        where: { id: parseInt(id, 10) },
+        where: { studentId },
         include: { class: true },
     });
 
@@ -19,15 +19,15 @@ exports.getStudentById = async (req, res) => {
 };
 
 exports.addStudent = async (req, res) => {
-    const { student_id, name, dob, gender, class_id } = req.body;
+    const { studentId, name, dob, gender, classId } = req.body;
 
     const student = await prisma.student.create({
         data: {
-            student_id,
+            studentId,
             name,
             dob,
             gender,
-            class_id: parseInt(class_id, 10),
+            classId: parseInt(classId, 10),
         },
     });
 
@@ -39,16 +39,30 @@ exports.addStudent = async (req, res) => {
 };
 
 exports.editStudent = async (req, res) => {
-    const { student_id, name, dob, gender, class_id } = req.body;
+    const { studentId, name, dob, gender, classId } = req.body;
 
     const student = await prisma.student.update({
-        where: { student_id },
+        where: { studentId },
         data: {
             name,
             dob,
             gender,
-            class_id: parseInt(class_id, 10),
+            classId: parseInt(classId, 10),
         },
+    });
+
+    if (req.xhr) {
+        return res.json(student);
+    }
+
+    return res.redirect('/');
+};
+
+exports.deleteStudent = async (req, res) => {
+    const { studentId } = req.body;
+
+    const student = await prisma.student.delete({
+        where: { studentId: studentId },
     });
 
     if (req.xhr) {

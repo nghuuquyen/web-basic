@@ -1,4 +1,4 @@
-# Student Management System (v3)
+# Student Management System (v3) - Server Side Rendering (SSR)
 
 ![Homepage](homepage.png)
 

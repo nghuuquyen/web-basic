@@ -1,4 +1,4 @@
-# Student Management System (v3)
+# Student Management System (v4) - Client Side Rendering (CSR)
 
 ![Homepage](homepage.png)
 

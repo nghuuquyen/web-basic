@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint-disable no-unused-vars */
 async function openModal(action, studentId = null) {
     document.getElementById('student-form').action = action === 'add' ? '/add-student' : '/edit-student';
     document.getElementById('modal-title').innerText = action === 'add' ? 'Add Student' : 'Edit Student';
@@ -28,10 +29,12 @@ async function openModal(action, studentId = null) {
     document.getElementById('student-modal').style.display = 'block';
 }
 
+/* eslint-disable no-unused-vars */
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
 }
 
+/* eslint-disable no-unused-vars */
 function confirmDelete(studentId) {
     document.getElementById('delete-studentId').value = studentId;
     document.getElementById('delete-modal').style.display = 'block';

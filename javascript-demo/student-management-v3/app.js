@@ -60,7 +60,7 @@ app.get('/api/student/:studentId', async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({
-            error: 'An error occurred while fetching the student',
+            error: error || 'An error occurred while fetching the student',
         });
     }
 });

@@ -7,7 +7,10 @@ export default [
     {
         files: ["**/*.js"],
         languageOptions: {
-            sourceType: "commonjs"
+            sourceType: "commonjs",
+            globals: {
+                ...globals.node  // Add Node.js globals
+            }
         },
         plugins: {
             prettier: pluginPrettier

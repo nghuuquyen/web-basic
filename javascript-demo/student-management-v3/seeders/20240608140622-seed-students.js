@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-    async up(queryInterface, Sequelize) {
+    async up(queryInterface) {
         const students = [
             {
                 studentId: '1000001',
@@ -36,7 +36,7 @@ module.exports = {
         return queryInterface.bulkInsert('students', students, {});
     },
 
-    async down(queryInterface, Sequelize) {
+    async down(queryInterface) {
         return queryInterface.bulkDelete('students', null, {});
     },
 };

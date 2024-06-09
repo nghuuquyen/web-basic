@@ -21,7 +21,10 @@ export default [
     },
     {
         languageOptions: {
-            globals: globals.browser
+            globals: {
+                ...globals.browser,  // Add browser globals
+                Vue: true,
+            }
         }
     },
     pluginJs.configs.recommended,

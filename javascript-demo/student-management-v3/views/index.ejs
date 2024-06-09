@@ -9,7 +9,7 @@
 <body>
 <div id="app">
     <h1>Student Management System (V3)</h1>
-    <button class="btn-primary" onclick="openModal('add')">Add Student</button>
+    <button class="btn-primary" @click="openModal('add')">Add Student</button>
     <h2>Student List</h2>
     <table>
         <thead>
@@ -31,8 +31,8 @@
                 <td><%= student.gender %></td>
                 <td><%= student.class.name %></td>
                 <td>
-                    <button class="btn-primary" onclick="openModal('edit', '<%= student.studentId %>')">Edit</button>
-                    <button class="btn-danger" onclick="confirmDelete('<%= student.studentId %>')">Delete</button>
+                    <button class="btn-primary" @click="openModal('edit', '<%= student.studentId %>')">Edit</button>
+                    <button class="btn-danger" @click="confirmDelete('<%= student.studentId %>')">Delete</button>
                 </td>
             </tr>
         <% }); %>
@@ -40,39 +40,42 @@
     </table>
 
     <!-- Add/Edit Modal -->
-    <div class="modal" id="student-modal">
+    <div class="modal" :style="{display: showModal ? 'block' : 'none'}">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close" onclick="closeModal('student-modal')">&times;</span>
-                <h2 id="modal-title"></h2>
+                <span class="close" @click="closeModal">&times;</span>
+                <h2>{{ modalTitle }}</h2>
             </div>
-            <form id="student-form" action="/add-student" method="POST">
+            <form :action="`${formAction === 'edit' ? '/edit-student' : '/add-student'}`" method="POST">
                 <div class="form-group">
                     <label for="studentId">Student ID</label>
-                    <input type="text" id="studentId" name="studentId" placeholder="Student ID" required>
+                    <input v-model="studentForm.studentId" :readonly="formAction === 'edit'" type="text" id="studentId"
+                           name="studentId" placeholder="Student ID" required>
                 </div>
                 <div class="form-group">
                     <label for="name">Student Name</label>
-                    <input type="text" id="name" name="name" placeholder="Student Name" required>
+                    <input v-model="studentForm.name" type="text" id="name" name="name" placeholder="Student Name"
+                           required>
                 </div>
                 <div class="form-group">
                     <label for="dob">Date of Birth</label>
-                    <input type="date" id="dob" name="dob" required>
+                    <input v-model="studentForm.dob" type="date" id="dob" name="dob" required>
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender:</label>
                     <div class="gender-container">
-                        <input type="radio" id="male" name="gender" value="Male">
+                        <input v-model="studentForm.gender" type="radio" id="male" name="gender" value="Male">
                         <label for="male">Male</label>
-                        <input type="radio" id="female" name="gender" value="Female">
+                        <input v-model="studentForm.gender" type="radio" id="female" name="gender" value="Female">
                         <label for="female">Female</label>
-                        <input type="radio" id="unspecified" name="gender" value="Unspecified">
+                        <input v-model="studentForm.gender" type="radio" id="unspecified" name="gender"
+                               value="Unspecified">
                         <label for="unspecified">Unspecified</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="classId">Class:</label>
-                    <select id="classId" name="classId" required>
+                    <select v-model="studentForm.classId" id="classId" name="classId" required>
                         <% classes.forEach(function(classItem) { %>
                             <option value="<%= classItem.id %>"><%= classItem.name %></option>
                         <% }) %>
@@ -84,17 +87,17 @@
     </div>
 
     <!-- Confirm Delete Modal -->
-    <div class="modal" id="delete-modal">
+    <div class="modal" :style="{display: showDeleteModal ? 'block' : 'none'}">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close" onclick="closeModal('delete-modal')">&times;</span>
+                <span class="close" @click="closeModal">&times;</span>
                 <h2>Confirm Delete</h2>
             </div>
             <p>Are you sure you want to delete this student?</p>
             <div class="modal-buttons">
-                <button class="btn-secondary" onclick="closeModal('delete-modal')">Cancel</button>
-                <form id="delete-form" action="/delete-student" method="POST" style="display:inline;">
-                    <input type="hidden" name="studentId" id="delete-studentId">
+                <button class="btn-secondary" @click="closeModal">Cancel</button>
+                <form action="/delete-student" method="POST" style="display:inline;">
+                    <input v-model="studentToDelete" type="hidden" name="studentId">
                     <button type="submit" class="btn-danger">Yes</button>
                 </form>
             </div>
@@ -102,6 +105,7 @@
     </div>
 </div>
 
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="/script.js"></script>
 </body>
 </html>

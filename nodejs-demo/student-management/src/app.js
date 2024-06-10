@@ -1,14 +1,13 @@
 require('express-async-errors');
+require('./configs/app');
 
 const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
-const logger = require('./libs/logger');
+const logger = require('./configs/logger');
+const morgan = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
-
-dotenv.config();
 
 const app = express();
 
@@ -16,9 +15,10 @@ app.set('view engine', 'ejs'); // Set view engine
 app.set('views', path.join(__dirname, 'views')); // Set views directory
 app.use(expressLayouts);
 app.set('layout', 'layouts/default'); // Set default layout
-app.use(express.static('src/public')); // Serve static files from src/public
+app.use(express.static('public')); // Serve static files from src/public
 app.use(bodyParser.json()); // Parse application/json
 app.use(bodyParser.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
+app.use(morgan('combined')); // Log HTTP requests
 
 // Register all application routes
 app.use('/', routes);

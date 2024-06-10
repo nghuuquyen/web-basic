@@ -11,12 +11,20 @@ import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import csrf from 'csurf';
+import rateLimit from 'express-rate-limit';
 
 const csrfProtection = csrf({ cookie: true });
+
+const limiter = rateLimit({
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: 'Too many requests from this IP, please try again later.',
+});
 
 const app = express();
 
 app.locals.siteName = config.siteName; // Set site name
+app.use(limiter); // Apply rate limiter
 app.use(helmet()); // Secure Express apps by setting various HTTP headers
 app.use(cors()); // Enable CORS with various options
 app.use(cookieParser()); // Parse Cookie header and populate req.cookies

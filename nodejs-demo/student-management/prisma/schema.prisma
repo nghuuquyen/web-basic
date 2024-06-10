@@ -13,13 +13,13 @@ datasource db {
 }
 
 model Student {
-  id         Int      @id @default(autoincrement())
-  studentId  String   @unique @map("student_id")
-  name       String
-  dob        String
-  gender     String
-  classId    Int      @map("class_id")
-  class      Class    @relation(fields: [classId], references: [id])
+  id        Int    @id @default(autoincrement())
+  studentId String @unique @map("student_id")
+  name      String
+  dob       String
+  gender    String
+  classId   Int    @map("class_id")
+  class     Class  @relation(fields: [classId], references: [id])
 
   @@map("students")
 }

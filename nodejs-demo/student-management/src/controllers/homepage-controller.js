@@ -6,5 +6,5 @@ exports.getHomepage = async (req, res) => {
 
     const classes = await prisma.class.findMany();
 
-    return res.render('index', { students, classes });
+    return res.render('pages/index', { students, classes });
 };

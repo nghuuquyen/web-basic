@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 const getPosts = async (req, res) => {
     const posts = await prisma.post.findMany({ include: { category: true } });
 
-    if (res.xhr) {
+    if (req.isAjax()) {
         return res.json(posts);
     }
 
@@ -22,7 +22,7 @@ const getPostById = async (req, res) => {
         throw new Error('Post not found');
     }
 
-    if (res.xhr) {
+    if (req.isAjax()) {
         return res.json(post);
     }
 

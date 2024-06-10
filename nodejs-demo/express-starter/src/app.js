@@ -32,6 +32,14 @@ app.set('layout', 'layouts/default');               // Set default layout
 app.use(express.static('public'));                  // Serve static files from src/public
 app.use(morgan('combined'));                        // Log HTTP requests
 
+// Middleware set function to check if request is AJAX
+app.use((req, res, next) => {
+    req.isAjax = () => {
+        return req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest' || req.headers['accept'].includes('application/json');
+    };
+    next();
+});
+
 // Middleware to set CSRF token
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();

@@ -73,7 +73,7 @@ app.use((err, req, res, next) => {
         return next(err);
     }
 
-    if (req.xhr) {
+    if (req.isAjax()) {
         return res.status(500).json({
             error: 'Something failed!',
             message: err.message,

@@ -8,6 +8,7 @@ export default [
         files: ["**/*.js"],
         languageOptions: {
             sourceType: "module",
+            ecmaVersion: "latest",
             globals: {
                 ...globals.node  // Add Node.js globals
             }
@@ -16,7 +17,9 @@ export default [
             prettier: pluginPrettier
         },
         rules: {
-            "prettier/prettier": "error"
+            "prettier/prettier": "error",
+            "@typescript-eslint/no-unsafe-argument": "off",
+            "@typescript-eslint/no-explicit-any": "off",
         }
     },
     {

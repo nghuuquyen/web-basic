@@ -21,26 +21,7 @@ const limiter = rateLimit({
     message: 'Too many requests from this IP, please try again later.',
 });
 
-const app = express();
-
-app.locals.siteName = config.siteName; // Set site name
-app.use(limiter); // Apply rate limiter
-app.use(helmet()); // Secure Express apps by setting various HTTP headers
-app.use(cors()); // Enable CORS with various options
-app.use(cookieParser()); // Parse Cookie header and populate req.cookies
-app.use(express.json()); // Parse application/json
-app.use(express.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
-app.use(csrfProtection); // CSRF protection
-app.use(compression()); // Compress responses
-app.set('view engine', 'ejs'); // Set view engine
-app.set('views', path.join('src/views')); // Set views directory
-app.use(expressLayouts); // Use express-ejs-layouts
-app.set('layout', 'layouts/default'); // Set default layout
-app.use(express.static('public')); // Serve static files from src/public
-app.use(morgan('combined')); // Log HTTP requests
-
-// Middleware set function to check if request is AJAX
-app.use((req, res, next) => {
+const isAjax = (req, res, next) => {
     req.isAjax = () => {
         return (
             req.xhr ||
@@ -49,7 +30,27 @@ app.use((req, res, next) => {
         );
     };
     next();
-});
+};
+
+const app = express();
+
+app.locals.siteName = config.siteName; // Set site name
+
+app.set('view engine', 'ejs'); // Set view engine
+app.set('views', path.join('src/views')); // Set views directory
+app.use(expressLayouts); // Use express-ejs-layouts
+app.set('layout', 'layouts/default'); // Set default layout
+app.use(limiter); // Apply rate limiter
+app.use(helmet()); // Secure Express apps by setting various HTTP headers
+app.use(cors()); // Enable CORS with various options
+app.use(cookieParser()); // Parse Cookie header and populate req.cookies
+app.use(express.json()); // Parse application/json
+app.use(express.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
+app.use(isAjax); // Middleware set function to check if request is AJAX
+app.use(compression()); // Compress responses
+app.use(express.static('public')); // Serve static files from src/public
+app.use(morgan('combined')); // Log HTTP requests
+app.use(csrfProtection); // CSRF protection
 
 // Middleware to set CSRF token
 app.use((req, res, next) => {

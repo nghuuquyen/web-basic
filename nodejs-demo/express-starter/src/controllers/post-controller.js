@@ -19,7 +19,7 @@ const getPostById = async (req, res) => {
     });
 
     if (!post) {
-        return res.status(404).send('Post not found');
+        throw new Error('Post not found');
     }
 
     if (res.xhr) {

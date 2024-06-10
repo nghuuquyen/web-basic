@@ -41,6 +41,11 @@ app.use((req, res, next) => {
 // Register all application routes
 app.use('/', routes);
 
+// Handle 404
+app.use((req, res) => {
+    res.status(404).render('404', { title: 'Page Not Found' });
+});
+
 // Error handler
 app.use((err, req, res, next) => {
     logger.error(err.message, { stack: err.stack });
@@ -56,7 +61,7 @@ app.use((err, req, res, next) => {
         });
     } else {
         res.status(500);
-        res.render('error', { error: err });
+        res.render('500', { error: err });
     }
 });
 

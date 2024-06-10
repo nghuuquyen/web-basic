@@ -1,5 +1,5 @@
 import 'express-async-errors';
-import './configs/app.js';
+import config from './configs/app.js';
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
@@ -7,19 +7,36 @@ import routes from './routes.js';
 import logger from './configs/logger.js';
 import morgan from 'morgan';
 import expressLayouts from 'express-ejs-layouts';
+import helmet from 'helmet';
+import cors from 'cors';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import csrf from 'csurf';
+
+const csrfProtection = csrf({ cookie: true });
 
 const app = express();
 
+app.locals.siteName = config.siteName;              // Set site name
+app.use(helmet());                                  // Secure Express apps by setting various HTTP headers
+app.use(cors());                                    // Enable CORS with various options
+app.use(cookieParser());                            // Parse Cookie header and populate req.cookies
+app.use(bodyParser.json());                         // Parse application/json
+app.use(bodyParser.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
+app.use(csrfProtection);                            // CSRF protection
+app.use(compression());                             // Compress responses
 app.set('view engine', 'ejs');                      // Set view engine
 app.set('views', path.join('src/views'));           // Set views directory
 app.use(expressLayouts);                            // Use express-ejs-layouts
 app.set('layout', 'layouts/default');               // Set default layout
 app.use(express.static('public'));                  // Serve static files from src/public
-app.use(bodyParser.json());                         // Parse application/json
-app.use(bodyParser.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
 app.use(morgan('combined'));                        // Log HTTP requests
 
-app.locals.siteName = 'Express Starter';            // Set site name
+// Middleware to set CSRF token
+app.use((req, res, next) => {
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
 
 // Register all application routes
 app.use('/', routes);

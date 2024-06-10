@@ -1,7 +1,7 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-exports.getPosts = async (req, res) => {
+const getPosts = async (req, res) => {
     const posts = await prisma.post.findMany();
 
     if (res.xhr) {
@@ -11,7 +11,7 @@ exports.getPosts = async (req, res) => {
     return res.render('pages/posts', { posts });
 };
 
-exports.getPostById = async (req, res) => {
+const getPostById = async (req, res) => {
     const { id } = req.params;
 
     const post = await prisma.post.findUnique({
@@ -27,4 +27,9 @@ exports.getPostById = async (req, res) => {
     }
 
     return res.render('pages/post-detail', { post });
+};
+
+export {
+    getPosts,
+    getPostById,
 };

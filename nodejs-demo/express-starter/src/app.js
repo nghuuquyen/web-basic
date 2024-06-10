@@ -1,24 +1,23 @@
-require('express-async-errors');
-require('./configs/app');
-
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const routes = require('./routes');
-const logger = require('./configs/logger');
-const morgan = require('morgan');
-const expressLayouts = require('express-ejs-layouts');
+import 'express-async-errors';
+import './configs/app.js';
+import express from 'express';
+import path from 'path';
+import bodyParser from 'body-parser';
+import routes from './routes.js';
+import logger from './configs/logger.js';
+import morgan from 'morgan';
+import expressLayouts from 'express-ejs-layouts';
 
 const app = express();
 
-app.set('view engine', 'ejs'); // Set view engine
-app.set('views', path.join(__dirname, 'views')); // Set views directory
-app.use(expressLayouts);
-app.set('layout', 'layouts/default'); // Set default layout
-app.use(express.static('public')); // Serve static files from src/public
-app.use(bodyParser.json()); // Parse application/json
+app.set('view engine', 'ejs');                      // Set view engine
+app.set('views', path.join('src/views'));           // Set views directory
+app.use(expressLayouts);                            // Use express-ejs-layouts
+app.set('layout', 'layouts/default');               // Set default layout
+app.use(express.static('public'));                  // Serve static files from src/public
+app.use(bodyParser.json());                         // Parse application/json
 app.use(bodyParser.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
-app.use(morgan('combined')); // Log HTTP requests
+app.use(morgan('combined'));                        // Log HTTP requests
 
 // Register all application routes
 app.use('/', routes);
@@ -42,4 +41,4 @@ app.use((err, req, res, next) => {
     }
 });
 
-module.exports = app;
+export default app;

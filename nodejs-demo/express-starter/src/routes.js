@@ -1,12 +1,11 @@
-const express = require('express');
-
-const homepageController = require('./controllers/homepage-controller');
-const postController = require('./controllers/post-controller');
+import express from 'express';
+import { getHomepage } from './controllers/homepage-controller.js';
+import { getPosts, getPostById } from './controllers/post-controller.js';
 
 const router = express.Router();
 
-router.get('/', homepageController.getHomepage);
-router.get('/posts', postController.getPosts);
-router.get('/post/:id', postController.getPostById);
+router.get('/', getHomepage);
+router.get('/posts', getPosts);
+router.get('/post/:id', getPostById);
 
-module.exports = router;
+export default router;

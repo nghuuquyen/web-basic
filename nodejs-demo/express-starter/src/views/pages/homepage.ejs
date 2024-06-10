@@ -1,0 +1,10 @@
+<section>
+    <h2>Recent Posts</h2>
+    <ul>
+        <% posts.forEach(post => { %>
+            <li>
+                <a href="/post/<%= post.id %>"><%= post.title %></a>
+            </li>
+        <% }) %>
+    </ul>
+</section>

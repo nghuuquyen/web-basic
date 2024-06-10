@@ -74,13 +74,12 @@ app.use((err, req, res, next) => {
     }
 
     if (req.xhr) {
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Something failed!',
             message: err.message,
         });
     } else {
-        res.status(500);
-        res.render('500', { error: err });
+        return res.status(500).render('500', { error: err });
     }
 });
 

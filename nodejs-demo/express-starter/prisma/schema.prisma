@@ -16,13 +16,27 @@ model Category {
   id   Int    @id @default(autoincrement())
   name String
   posts Post[]
+
+  @@map("categories")
 }
 
 model Post {
   id          Int       @id @default(autoincrement())
   title       String
   content     String
-  categoryId  Int
+  categoryId  Int       @map("category_id")
   category    Category  @relation(fields: [categoryId], references: [id])
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime  @map("created_at")  @default(now())
+
+  @@map("posts")
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  message   String
+  createdAt DateTime @map("created_at") @default(now())
+
+  @@map("contacts")
 }

@@ -1,7 +1,13 @@
 const express = require('express');
 
 const { getHomepage } = require('./controllers/homepage-controller');
-const { getStudents, getStudentById, addStudent, editStudent, deleteStudent } = require('./controllers/student-controller');
+const {
+    getStudents,
+    getStudentById,
+    addStudent,
+    editStudent,
+    deleteStudent,
+} = require('./controllers/student-controller');
 const { getClasses } = require('./controllers/class-controller');
 
 const router = express.Router();

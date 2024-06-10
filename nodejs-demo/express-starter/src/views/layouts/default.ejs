@@ -3,24 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Express Starter</title>
+    <title><%= siteName %></title>
     <link rel="stylesheet" href="/dist/style.css">
 </head>
-<body>
-<header>
-    <h1 class="bg-blue-500 text-xl">My Blog</h1>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/posts">Posts</a>
-    </nav>
-</header>
-<main id="app">
+<body class="bg-gray-100 text-gray-900 flex flex-col justify-between min-h-svh">
+
+<%- include('../partials/header'); %>
+
+<main class="container mx-auto py-8 flex-grow">
     <%- body %>
 </main>
-<footer>
-    <p>&copy; 2024 My Blog</p>
-</footer>
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="/script.js"></script>
+
+<%- include('../partials/footer'); %>
 </body>
 </html>

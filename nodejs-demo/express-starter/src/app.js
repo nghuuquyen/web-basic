@@ -19,6 +19,8 @@ app.use(bodyParser.json());                         // Parse application/json
 app.use(bodyParser.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
 app.use(morgan('combined'));                        // Log HTTP requests
 
+app.locals.siteName = 'Express Starter';            // Set site name
+
 // Register all application routes
 app.use('/', routes);
 

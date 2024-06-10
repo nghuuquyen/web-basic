@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/', getHomepage);
 router.get('/posts', getPosts);
-router.get('/post/:id', getPostById);
+router.get('/posts/:id', getPostById);
 
 export default router;

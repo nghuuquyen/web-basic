@@ -10,8 +10,8 @@
     "build": "NODE_ENV=production npm run build:css",
     "lint": "eslint '**/*.js' --fix",
     "format": "prettier --write '**/*.js'",
-    "build:css": "postcss src/resources/style.css -o public/dist/style.css",
-    "watch:css": "postcss src/resources/style.css -o public/dist/style.css --watch",
+    "build:css": "postcss public/style.css -o public/dist/style.css",
+    "watch:css": "postcss public/style.css -o public/dist/style.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -2,7 +2,6 @@ import 'express-async-errors';
 import config from './configs/app.js';
 import express from 'express';
 import path from 'path';
-import bodyParser from 'body-parser';
 import routes from './routes.js';
 import logger from './configs/logger.js';
 import morgan from 'morgan';
@@ -21,8 +20,8 @@ app.locals.siteName = config.siteName; // Set site name
 app.use(helmet()); // Secure Express apps by setting various HTTP headers
 app.use(cors()); // Enable CORS with various options
 app.use(cookieParser()); // Parse Cookie header and populate req.cookies
-app.use(bodyParser.json()); // Parse application/json
-app.use(bodyParser.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
+app.use(express.json()); // Parse application/json
+app.use(express.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
 app.use(csrfProtection); // CSRF protection
 app.use(compression()); // Compress responses
 app.set('view engine', 'ejs'); // Set view engine

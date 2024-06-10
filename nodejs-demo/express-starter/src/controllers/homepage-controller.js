@@ -6,6 +6,4 @@ const getHomepage = async (req, res) => {
     return res.render('pages/homepage', { posts });
 };
 
-export {
-    getHomepage
-};
+export { getHomepage };

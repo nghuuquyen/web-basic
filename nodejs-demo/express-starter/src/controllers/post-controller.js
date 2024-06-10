@@ -29,7 +29,4 @@ const getPostById = async (req, res) => {
     return res.render('pages/post-detail', { post });
 };
 
-export {
-    getPosts,
-    getPostById,
-};
+export { getPosts, getPostById };

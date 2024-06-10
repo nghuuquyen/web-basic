@@ -35,7 +35,8 @@
     "postcss-cli": "^11.0.0",
     "prisma": "^5.15.0",
     "vue": "^3.4.27",
-    "winston": "^3.13.0"
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

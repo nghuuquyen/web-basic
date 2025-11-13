@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👥 User Management System</h1>
+            <p class="subtitle">Browse and search users from our database</p>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search by name, email, or company..."
+                    autocomplete="off"
+                >
+                <span class="search-icon">🔍</span>
+            </div>
+            <button id="refreshBtn" class="refresh-btn">🔄 Refresh</button>
+        </div>
+
+        <div id="loadingIndicator" class="loading">
+            <div class="spinner"></div>
+            <p>Loading users...</p>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <span class="error-icon">⚠️</span>
+            <span id="errorText"></span>
+        </div>
+
+        <div class="table-container">
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Company</th>
+                        <th>City</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <!-- Users will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="results-info">
+            <p id="resultsCount">Showing 0 users</p>
+        </div>
+    </div>
+
+    <!-- User Detail Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">User Details</h2>
+            <div id="modalBody" class="modal-body">
+                <!-- User details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
